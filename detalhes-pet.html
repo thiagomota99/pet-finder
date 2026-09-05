@@ -1,8 +1,194 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Detalhes do Pet</title><link rel="stylesheet" href="detalhes-pet.css"></head><body><div class="app">
-<header class="header"><a class="back" href="explorar.html">‹</a><h1 class="title">Detalhes Do Pet</h1><div class="avatar">👩🏻</div></header>
-<div class="hero"><img src="assets/bento.jpg"><span class="status">⌖ Perdido</span></div>
-<main class="sheet"><div class="topline"><div><h2>Bento</h2><p>🐾 Golden Retriever, Macho</p></div><button class="share">♧</button></div>
-<div class="stats"><div><small>PORTE</small><strong>↗ &nbsp;Grande</strong></div><div><small>TEMPERAMENTO</small><strong>Dócil e Assustado</strong></div></div>
-<section><h3>Última vez visto</h3><p class="seen">◴ Moema, São Paulo - SP (Há 2 dias)</p><img class="map" src="assets/map.jpg"></section>
-<div class="tutor"><div class="tutor-avatar">👩🏻</div><div><small>Tutor</small><strong>Mariana Silva</strong></div></div>
-<a class="contact" href="login.html">▣ &nbsp; Entrar em Contato</a></main></div></body></html>
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Detalhes do Pet</title>
+
+    <link rel="stylesheet" href="detalhes-pet.css">
+
+
+</head>
+
+<body>
+
+    <div class="app">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <a class="back" href="explorar.html">
+                ‹
+            </a>
+
+
+            <h1 class="title">
+                Detalhes Do Pet
+            </h1>
+
+
+            <div class="avatar">
+                👩🏻
+            </div>
+
+        </header>
+
+
+
+        <!-- FOTO PRINCIPAL -->
+
+        <div class="hero">
+
+            <img id="petFoto" src="assets/bolinha.jpg" alt="Foto do animal">
+
+
+            <span id="petStatus" class="status">
+                Carregando...
+            </span>
+
+        </div>
+
+
+
+        <!-- INFORMAÇÕES -->
+
+        <main class="sheet">
+
+
+            <!-- NOME / RAÇA -->
+
+            <div class="topline">
+
+                <div>
+
+                    <h2 id="petNome">
+                        Carregando...
+                    </h2>
+
+
+                    <p id="petDescricao">
+                        Carregando...
+                    </p>
+
+                </div>
+
+
+                <button class="share" id="btnCompartilhar" type="button">
+                    ♧
+                </button>
+
+            </div>
+
+
+
+            <!-- ESTATÍSTICAS -->
+
+            <div class="stats">
+
+
+                <div>
+
+                    <small>
+                        PORTE
+                    </small>
+
+
+                    <strong id="petPorte">
+                        -
+                    </strong>
+
+                </div>
+
+
+
+                <div>
+
+                    <small>
+                        TEMPERAMENTO
+                    </small>
+
+
+                    <strong id="petTemperamento">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LOCALIZAÇÃO -->
+
+            <section>
+
+                <h3>
+                    Última vez visto
+                </h3>
+
+
+                <p id="petLocalizacao" class="seen">
+                    Localização não informada
+                </p>
+
+
+                <img id="petMapa" class="map" src="assets/map.jpg" alt="Mapa da localização">
+
+            </section>
+
+
+
+            <!-- TUTOR -->
+
+            <div class="tutor">
+
+                <div class="tutor-avatar">
+                    👩🏻
+                </div>
+
+
+                <div>
+
+                    <small>
+                        Tutor
+                    </small>
+
+
+                    <strong id="petTutor">
+                        Carregando...
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CONTATO -->
+
+            <a class="contact" href="#" id="btnContato">
+                ▣ &nbsp; Entrar em Contato
+            </a>
+
+
+        </main>
+
+    </div>
+
+    <script src="js/api.js"></script>
+
+    <script src="js/auth.js"></script>
+
+    <script src="js/detalhes-pet.js"></script>
+
+</body>
+
+</html>

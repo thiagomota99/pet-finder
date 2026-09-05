@@ -1,11 +1,137 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PetFinder - Explorar</title><link rel="stylesheet" href="explorar.css"></head><body><div class="app">
-<header class="header"><div class="brand"><span class="paw">🐾</span><span>PetFinder</span></div><div class="avatar">👩🏻</div></header>
-<main class="content"><h1>Bom dia!</h1><p class="intro">Vamos ajudar esses pets a voltarem para casa.</p>
-<div class="search"><span>⌕</span><input placeholder="Buscar por raça, nome ou local..."><button>☷</button></div>
-<div class="filters"><button class="active">➤ Próximos</button><button>Cães</button><button>Gatos</button><button>♡ Recompensa</button></div>
-<div class="cards">
-<article class="card"><div class="photo"><img src="assets/bolinha.jpg"><span class="badge urgent">ⓘ Urgente</span><button class="heart">♡</button></div><div class="card-body"><div class="row"><h2>Bolin­ha</h2><span class="time">Há 2 horas</span></div><p>Poodle Toy • Macho</p><div class="location"><span>⌖ Av. Paulista, São Paulo</span><small>~ 1.2 km</small></div></div></article>
-<article class="card"><div class="photo"><img src="assets/luna.jpg"><span class="badge reward">ⓢ Recompensa</span><button class="heart">♡</button></div><div class="card-body"><div class="row"><h2>Luna</h2><span class="time">Há 5 horas</span></div><p>SRD (Gato) • Fêmea</p><div class="location"><span>⌖ Parque Ibirapuera, SP</span><small>~ 3.5 km</small></div></div></article>
-<article class="card" onclick="location.href='detalhes-pet.html'"><div class="photo"><img src="assets/thor.jpg"><span class="badge lost">⌕ Perdido</span><button class="heart">♡</button></div><div class="card-body"><div class="row"><h2>Thor</h2><span class="time">Ontem</span></div><p>Golden Retriever • Macho</p><div class="location"><span>⌖ Vila Mariana, SP</span><small>~ 5.0 km</small></div></div></article>
-</div></main>
-<nav class="bottom"><a class="nav active" href="explorar.html"><span class="navicon">◉</span>Explorar</a><a class="nav" href="cadastrar.html"><span class="navicon plus">+</span>Cadastrar</a><a class="nav" href="login.html"><span class="navicon">□</span>Mensagens</a><a class="nav" href="login.html"><span class="navicon">◎</span>Perfil</a></nav></div></body></html>
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetFinder - Explorar</title>
+
+    <link rel="stylesheet" href="explorar.css">
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+
+            <div class="brand">
+                <span class="paw">🐾</span>
+                <span>PetFinder</span>
+            </div>
+
+            <div class="avatar">
+                👩🏻
+            </div>
+
+        </header>
+
+
+        <main class="content">
+
+            <h1 id="saudacao">
+                Bom dia!
+            </h1>
+
+            <p class="intro">
+                Vamos ajudar esses pets a voltarem para casa.
+            </p>
+
+
+            <!-- BUSCA -->
+
+            <div class="search">
+
+                <span>⌕</span>
+
+                <input id="campoBusca" type="text" placeholder="Buscar por raça, nome ou local...">
+
+                <button type="button" id="btnFiltro">
+                    ☷
+                </button>
+
+            </div>
+
+
+            <!-- FILTROS -->
+
+            <div class="filters">
+
+                <button type="button" class="active" data-filtro="TODOS">
+                    ➤ Próximos
+                </button>
+
+                <button type="button" data-filtro="CANINO">
+                    Cães
+                </button>
+
+                <button type="button" data-filtro="FELINO">
+                    Gatos
+                </button>
+
+                <button type="button" data-filtro="RECOMPENSA">
+                    ♡ Recompensa
+                </button>
+
+            </div>
+
+
+            <!-- ANIMAIS -->
+
+            <div class="cards" id="animaisContainer">
+
+                <p>
+                    Carregando animais...
+                </p>
+
+            </div>
+
+        </main>
+
+
+        <!-- MENU INFERIOR -->
+
+        <nav class="bottom">
+
+            <a class="nav active" href="explorar.html">
+                <span class="navicon">
+                    ◉
+                </span>
+
+                Explorar
+            </a>
+
+
+            <a class="nav" href="cadastrar.html">
+                <span class="navicon plus">
+                    +
+                </span>
+
+                Cadastrar
+            </a>
+
+
+            <a class="nav" href="perfil.html">
+                <span class="navicon">
+                    ◎
+                </span>
+
+                Perfil
+            </a>
+
+        </nav>
+
+    </div>
+
+    <script src="js/api.js"></script>
+
+    <script src="js/auth.js"></script>
+
+    <script src="js/explorar.js"></script>
+
+</body>
+
+</html>

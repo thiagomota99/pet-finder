@@ -1,1 +1,337 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PetFinder - Cadastrar Pet</title><link rel="stylesheet" href="cadastrar.css"></head><body><div class="app"><header class="header"><div class="brand"><span class="paw">🐾</span><span>PetFinder</span></div><div class="avatar">👩🏻</div></header><main class="content"><div class="intro"><h1>Cadastrar Pet Perdido</h1><p>Preencha as informações para ajudar a comunidade a encontrar seu pet mais rápido.</p></div><section><h2 class="section-title">Informações Básicas</h2><div class="field"><label>Nome do Pet</label><input class="input" placeholder="Ex: Rex, Luna, sem nome..."></div><div class="two"><div class="field"><label>Espécie</label><select><option>Selecione</option><option>Cachorro</option><option>Gato</option><option>Ave</option><option>Outro</option></select></div><div class="field"><label>Raça</label><input class="input" placeholder="Ex: SRD, Poodle..."></div></div><div class="field"><label>Porte</label><div class="sizes"><button>Pequeno</button><button>Médio</button><button>Grande</button></div></div><div class="field"><label>Temperamento <span>(Opcional)</span></label><input class="input" placeholder="Ex: Assustado, dócil, não se aproxima..."></div></section><section><h2 class="section-title">Localização</h2><div class="field"><label>Última localização vista</label><div class="with-icon"><span>⌖</span><input class="input" placeholder="Rua, Bairro, Ponto de referência..."></div></div><div class="map-placeholder"></div></section><section><h2 class="section-title">Fotos</h2><p class="desc">Fotos claras ajudam muito na identificação.</p><label class="upload"><input type="file" multiple accept="image/*"><span class="upload-icon">📷<b>+</b></span><strong>Adicionar fotos</strong><small>Toque para selecionar</small></label></section><section><h2 class="section-title">Contato</h2><div class="field"><label>Celular (WhatsApp)</label><div class="with-icon"><span class="blue">▯</span><input id="tel" class="input" placeholder="(00) 00000-0000"></div></div></section><button class="btn-main publish" onclick="location.href='explorar.html'">📢 &nbsp; Publicar Anúncio</button></main><nav class="bottom"><a class="nav" href="explorar.html"><span class="navicon">◉</span>Explorar</a><a class="nav active" href="cadastrar.html"><span class="navicon plus">+</span>Cadastrar</a><a class="nav" href="login.html"><span class="navicon">□</span>Mensagens</a><a class="nav" href="login.html"><span class="navicon">◎</span>Perfil</a></nav></div><script>document.querySelectorAll('.sizes button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.sizes button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected')});const tel=document.getElementById('tel');tel.oninput=()=>{let v=tel.value.replace(/\D/g,'').slice(0,11);if(v.length>6)v=v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/,'($1) $2-$3');else if(v.length>2)v=v.replace(/^(\d{2})(\d{0,5})/,'($1) $2');tel.value=v}</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetFinder - Cadastrar Pet</title>
+
+    <link rel="stylesheet" href="cadastrar.css">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="brand">
+                <span class="paw">🐾</span>
+                <strong>PetFinder</strong>
+            </div>
+
+            <a href="perfil.html" class="avatar" aria-label="Perfil">
+                👤
+            </a>
+
+        </header>
+
+
+        <!-- CONTEÚDO -->
+        <main class="content">
+
+            <h1>Cadastrar pet</h1>
+
+            <p class="intro">
+                Cadastre um pet desaparecido para ajudar a encontrá-lo.
+            </p>
+
+
+            <form id="cadastroPetForm">
+
+                <!-- NOME -->
+                <div class="field">
+
+                    <label for="nome">
+                        Nome do pet
+                    </label>
+
+                    <input type="text" id="nome" class="input" placeholder="Ex.: Rex" required>
+
+                </div>
+
+
+                <!-- ESPÉCIE -->
+                <div class="field">
+
+                    <label for="especie">
+                        Espécie
+                    </label>
+
+                    <select id="especie" required>
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="CANINO">
+                            Canino
+                        </option>
+
+                        <option value="FELINO">
+                            Felino
+                        </option>
+
+                        <option value="EQUINO">
+                            Equino
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- RAÇA -->
+                <div class="field">
+
+                    <label for="raca">
+                        Raça
+                    </label>
+
+                    <input type="text" id="raca" class="input" placeholder="Ex.: Labrador" required>
+
+                </div>
+
+
+                <!-- PORTE -->
+                <div class="field">
+
+                    <label>
+                        Porte
+                    </label>
+
+                    <div class="porte-options">
+
+                        <button type="button" class="porte-btn" data-porte="PEQUENO">
+                            Pequeno
+                        </button>
+
+                        <button type="button" class="porte-btn" data-porte="MEDIO">
+                            Médio
+                        </button>
+
+                        <button type="button" class="porte-btn" data-porte="GRANDE">
+                            Grande
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TEMPERAMENTO -->
+                <div class="field">
+
+                    <label for="temperamento">
+                        Temperamento
+                    </label>
+
+                    <select id="temperamento">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="DOCIL">
+                            Dócil
+                        </option>
+
+                        <option value="ASSUSTADO">
+                            Assustado
+                        </option>
+
+                        <option value="FEROZ">
+                            Feroz
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ENDEREÇO / LOCALIZAÇÃO -->
+                <div class="field">
+
+                    <label for="localizacao">
+                        Última localização vista
+                    </label>
+
+                    <div class="location-input">
+
+                        <span>📍</span>
+
+                        <input type="text" id="localizacao" class="input" placeholder="Ex.: Jardim América" required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MAPA -->
+                <div class="map-wrapper">
+
+                    <div class="map-title">
+                        Localização no mapa
+                    </div>
+
+                    <div id="map"></div>
+
+                    <p class="map-instruction">
+                        📍 Clique no mapa para marcar o local onde o pet foi visto.
+                    </p>
+
+
+                    <!-- COORDENADAS -->
+                    <div class="coordinates">
+
+                        <div class="field">
+
+                            <label for="latitude">
+                                Latitude
+                            </label>
+
+                            <input type="text" id="latitude" class="input" readonly placeholder="Selecione no mapa">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="longitude">
+                                Longitude
+                            </label>
+
+                            <input type="text" id="longitude" class="input" readonly placeholder="Selecione no mapa">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOTOS -->
+                <div class="field">
+
+                    <label for="fotos">
+                        Fotos
+                    </label>
+
+                    <label class="photo-upload" for="fotos">
+
+                        <span class="photo-icon">
+                            📷
+                        </span>
+
+                        <span>
+
+                            <strong id="fotoTitulo">
+                                Adicionar fotos
+                            </strong>
+
+                            <small id="fotoDescricao">
+                                Toque para selecionar
+                            </small>
+
+                        </span>
+
+                    </label>
+
+                    <input type="file" id="fotos" accept="image/*" multiple hidden>
+
+                </div>
+
+
+                <!-- TELEFONE -->
+                <div class="field">
+
+                    <label for="telefone">
+                        Telefone para contato
+                        <span class="whatsapp-label">(WhatsApp)</span>
+                    </label>
+
+                    <input type="tel" id="telefone" class="input" placeholder="(62) 99999-9999" maxlength="15">
+
+                </div>
+
+
+                <!-- PUBLICAR -->
+                <button type="submit" id="btnPublicar" class="btn-main">
+
+                    📢&nbsp; Publicar Anúncio
+
+                </button>
+
+            </form>
+
+        </main>
+
+
+        <!-- MENU INFERIOR -->
+        <nav class="bottom">
+
+            <a href="explorar.html" class="nav">
+
+                <span class="navicon">
+                    ⌕
+                </span>
+
+                <span>
+                    Explorar
+                </span>
+
+            </a>
+
+
+            <a href="cadastrar.html" class="nav active">
+
+                <span class="navicon plus">
+                    +
+                </span>
+
+                <span>
+                    Cadastrar
+                </span>
+
+            </a>
+
+
+            <a href="perfil.html" class="nav">
+
+                <span class="navicon">
+                    ♙
+                </span>
+
+                <span>
+                    Perfil
+                </span>
+
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="">
+    </script>
+
+
+    <!-- API -->
+    <script src="js/api.js"></script>
+
+    <!-- AUTENTICAÇÃO -->
+    <script src="js/auth.js"></script>
+
+    <!-- CADASTRO -->
+    <script src="js/cadastrar.js"></script>
+
+</body>
+
+</html>

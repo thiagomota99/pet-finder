@@ -1,0 +1,190 @@
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PetFinder - Perfil</title>
+
+    <link rel="stylesheet" href="perfil.css">
+
+</head>
+
+<body>
+
+    <div class="app">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <a class="back" href="explorar.html">
+                ‹
+            </a>
+
+
+            <h1 class="title">
+                Meu Perfil
+            </h1>
+
+
+            <div class="avatar">
+                👩🏻
+            </div>
+
+        </header>
+
+
+
+        <!-- CONTEÚDO -->
+
+        <main class="content perfil-page">
+
+
+            <section class="profile-header">
+
+                <div class="profile-avatar">
+                    👩🏻
+                </div>
+
+
+                <div class="profile-info">
+
+                    <h2 id="usuarioNome">
+                        Carregando...
+                    </h2>
+
+                    <p id="usuarioEmail">
+                        Carregando...
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- DADOS DO USUÁRIO -->
+
+            <section class="profile-card">
+
+                <h2 class="section-title">
+                    Meus dados
+                </h2>
+
+
+                <div class="profile-field">
+
+                    <span>
+                        Nome completo
+                    </span>
+
+                    <strong id="campoNome">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>
+                        E-mail
+                    </span>
+
+                    <strong id="campoEmail">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                    <span>
+                        Telefone
+                    </span>
+
+                    <strong id="campoTelefone">
+                        Não informado
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- AÇÕES -->
+
+            <section class="profile-actions">
+
+                <button type="button" id="btnEditar" class="btn-main">
+                    ✎ &nbsp; Editar perfil
+                </button>
+
+
+                <button type="button" id="btnSair" class="btn-logout">
+                    ↪ &nbsp; Sair da conta
+                </button>
+
+            </section>
+
+
+        </main>
+
+
+
+        <!-- MENU INFERIOR -->
+
+        <nav class="bottom">
+
+            <a class="nav" href="explorar.html">
+
+                <span class="navicon">
+                    ◉
+                </span>
+
+                Explorar
+
+            </a>
+
+
+            <a class="nav" href="cadastrar.html">
+
+                <span class="navicon plus">
+                    +
+                </span>
+
+                Cadastrar
+
+            </a>
+
+
+            <a class="nav active" href="perfil.html">
+
+                <span class="navicon">
+                    ◎
+                </span>
+
+                Perfil
+
+            </a>
+
+        </nav>
+
+
+    </div>
+
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/perfil.js"></script>
+</body>
+
+</html>

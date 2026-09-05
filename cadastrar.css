@@ -1,3 +1,573 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-*{box-sizing:border-box;margin:0;padding:0}html,body{min-height:100%;font-family:Arial,Helvetica,sans-serif;color:#171717;background:#f7f8fc}body{display:flex;justify-content:center}.app{width:100%;max-width:430px;min-height:100vh;background:#f8f9fd;position:relative}.header{height:68px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 21px;border-bottom:1px solid #eee;position:relative;z-index:2}.brand{display:flex;align-items:center;gap:9px;color:#91420f;font-size:21px}.paw{font-size:22px}.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#f0c9a7,#b8d8b0);display:grid;place-items:center;font-size:18px}.back{font-size:35px;line-height:1;text-decoration:none;color:#111}.title{font-size:25px;font-weight:500;position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap}.bottom{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:430px;height:76px;background:#fff;border-top:1px solid #eee;display:flex;z-index:20}.nav{flex:1;text-decoration:none;color:#27211f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:12px}.nav.active{color:#98430f}.navicon{font-size:23px;height:24px;display:grid;place-items:center}.plus{border:2px solid currentColor;border-radius:50%;width:22px;height:22px;font-size:19px}.content{padding:22px 21px 110px}.section-title{color:#91420f;font-size:21px;font-weight:500;margin-bottom:17px}.field{margin-bottom:17px}.field label{display:block;font-size:15px;font-weight:600;margin-bottom:9px}.input,select{width:100%;height:53px;border:1px solid #dedee2;border-radius:10px;background:#fff;padding:0 15px;font-size:16px;outline:none;color:#2b2929}.input::placeholder{color:#aaa7aa}.input:focus,select:focus{border-color:#aa4d0a;box-shadow:0 0 0 2px #aa4d0a18}.btn-main{height:60px;border:0;border-radius:31px;background:#a94c00;color:#fff;font-size:17px;cursor:pointer;box-shadow:0 3px 7px #0002}.btn-main:hover{background:#8f4000}.muted{color:#5c5655}
-body{background:#f8f9fd}.intro h1{font-size:27px;margin-bottom:11px}.intro p{font-size:16px;line-height:1.55;color:#57514f;margin-bottom:25px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.sizes{display:flex;gap:9px}.sizes button{flex:1;height:39px;border:0;border-radius:22px;background:#e5edff;font-size:14px;color:#423a37}.sizes .selected{background:#a94c00;color:#fff}.field label span{font-weight:400}.with-icon{position:relative}.with-icon>span{position:absolute;left:17px;top:50%;transform:translateY(-50%);font-size:25px;color:#a94c00;z-index:1}.with-icon .blue{color:#145d94}.with-icon .input{padding-left:51px}.map-placeholder{height:139px;background:#dce6fa;border-radius:9px}.desc{font-size:14px;color:#5d5653;margin:-8px 0 18px}.upload{height:173px;border:2px dashed #a9c7f6;background:#f0f6ff;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative}.upload input{position:absolute;inset:0;opacity:0;cursor:pointer}.upload-icon{width:52px;height:52px;border-radius:50%;background:#d5e6ff;display:grid;place-items:center;font-size:25px;color:#1763aa;position:relative;margin-bottom:9px}.upload-icon b{position:absolute;right:5px;top:3px;font-size:18px}.upload strong{color:#135693;font-size:15px;margin-bottom:5px}.upload small{font-size:13px}.publish{width:100%;margin-top:5px}
+html,
+body {
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #171717;
+  background: #f7f8fc;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  background: #f8f9fd;
+  position: relative;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  height: 68px;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 21px;
+
+  border-bottom: 1px solid #eee;
+
+  position: relative;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  color: #91420f;
+
+  font-size: 21px;
+}
+
+.paw {
+  font-size: 22px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #f0c9a7, #b8d8b0);
+
+  display: grid;
+  place-items: center;
+
+  font-size: 18px;
+
+  text-decoration: none;
+}
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.content {
+  width: 100%;
+
+  padding: 18px 21px 110px;
+}
+
+.content h1 {
+  font-size: 27px;
+  margin-bottom: 7px;
+}
+
+.intro {
+  font-size: 16px;
+  color: #514b49;
+
+  margin-bottom: 20px;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+.field {
+  width: 100%;
+  margin-bottom: 17px;
+}
+
+.field label {
+  display: block;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  margin-bottom: 9px;
+}
+
+.input,
+select {
+  width: 100%;
+  height: 53px;
+
+  border: 1px solid #dedee2;
+  border-radius: 10px;
+
+  background: #fff;
+
+  padding: 0 15px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  color: #2b2929;
+}
+
+.input::placeholder {
+  color: #aaa7aa;
+}
+
+.input:focus,
+select:focus {
+  border-color: #aa4d0a;
+
+  box-shadow: 0 0 0 2px #aa4d0a18;
+}
+
+/* =========================================================
+   PORTE
+   ========================================================= */
+
+.porte-options {
+  display: flex;
+
+  gap: 9px;
+
+  width: 100%;
+}
+
+.porte-btn {
+  flex: 1;
+
+  height: 48px;
+
+  border: 1px solid #dedee2;
+
+  border-radius: 10px;
+
+  background: #fff;
+
+  color: #322b28;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.porte-btn:hover {
+  border-color: #a94c00;
+}
+
+.porte-btn.selected {
+  background: #a94c00;
+
+  color: #fff;
+
+  border-color: #a94c00;
+}
+
+/* =========================================================
+   LOCALIZAÇÃO
+   ========================================================= */
+
+.location-input {
+  position: relative;
+
+  width: 100%;
+}
+
+.location-input > span {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  z-index: 2;
+
+  font-size: 17px;
+
+  pointer-events: none;
+}
+
+.location-input .input {
+  padding-left: 49px;
+
+  background: #eaf1ff;
+}
+
+/* =========================================================
+   MAPA
+   ========================================================= */
+
+.map-wrapper {
+  width: 100%;
+
+  margin-top: 4px;
+  margin-bottom: 20px;
+
+  overflow: hidden;
+}
+
+.map-title {
+  font-size: 15px;
+  font-weight: 600;
+
+  margin-bottom: 9px;
+}
+
+/*
+ * Container físico do mapa.
+ *
+ * Importante:
+ * Não colocamos display:flex/grid aqui.
+ * O Leaflet calcula sozinho o tamanho do mapa.
+ */
+
+#map {
+  width: 100%;
+  height: 280px;
+
+  border: 1px solid #d7d7d7;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  background: #e5e7eb;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+/*
+ * O container interno do Leaflet
+ * precisa ocupar 100% da área.
+ */
+
+#map .leaflet-container {
+  width: 100%;
+  height: 100%;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+ * Corrige o comportamento das imagens
+ * usadas pelo Leaflet.
+ */
+
+#map img {
+  max-width: none !important;
+}
+
+/*
+ * Mantém os controles acima do mapa.
+ */
+
+#map .leaflet-control-container {
+  z-index: 500;
+}
+
+/* =========================================================
+   INSTRUÇÃO DO MAPA
+   ========================================================= */
+
+.map-instruction {
+  margin-top: 9px;
+  margin-bottom: 14px;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  color: #514b49;
+}
+
+/* =========================================================
+   COORDENADAS
+   ========================================================= */
+
+.coordinates {
+  display: flex;
+
+  gap: 12px;
+
+  width: 100%;
+}
+
+.coordinates .field {
+  flex: 1;
+
+  min-width: 0;
+
+  margin-bottom: 0;
+}
+
+.coordinates .input {
+  font-size: 14px;
+
+  color: #555;
+
+  padding-left: 12px;
+  padding-right: 12px;
+
+  background: #f3f3f5;
+}
+
+/* =========================================================
+   FOTOS
+   ========================================================= */
+
+.photo-upload {
+  min-height: 92px;
+
+  border: 1px dashed #c9c9ce;
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  display: flex !important;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.photo-upload:hover {
+  background: #fafafa;
+
+  border-color: #a94c00;
+}
+
+.photo-icon {
+  font-size: 27px;
+}
+
+.photo-upload strong,
+.photo-upload small {
+  display: block;
+}
+
+.photo-upload strong {
+  font-size: 15px;
+
+  margin-bottom: 5px;
+}
+
+.photo-upload small {
+  color: #777;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   WHATSAPP
+   ========================================================= */
+
+.whatsapp-label {
+  font-weight: 400;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   BOTÃO
+   ========================================================= */
+
+.btn-main {
+  width: 100%;
+
+  height: 60px;
+
+  border: 0;
+
+  border-radius: 31px;
+
+  background: #a94c00;
+
+  color: #fff;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 7px #0002;
+
+  transition:
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.btn-main:hover {
+  background: #8f4000;
+}
+
+.btn-main:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   MENU INFERIOR
+   ========================================================= */
+
+.bottom {
+  position: fixed;
+
+  left: 50%;
+  bottom: 0;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+  max-width: 430px;
+
+  height: 76px;
+
+  background: #fff;
+
+  border-top: 1px solid #eee;
+
+  display: flex;
+
+  z-index: 20;
+}
+
+.nav {
+  flex: 1;
+
+  text-decoration: none;
+
+  color: #27211f;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  font-size: 12px;
+}
+
+.nav.active {
+  color: #98430f;
+}
+
+.navicon {
+  font-size: 23px;
+
+  height: 24px;
+
+  display: grid;
+
+  place-items: center;
+}
+
+.plus {
+  border: 2px solid currentColor;
+
+  border-radius: 50%;
+
+  width: 22px;
+  height: 22px;
+
+  font-size: 19px;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .coordinates {
+    gap: 8px;
+  }
+
+  .coordinates .input {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    font-size: 13px;
+  }
+
+  #map {
+    height: 250px;
+  }
+}
+
+/* =========================================================
+   TELAS MUITO PEQUENAS
+   ========================================================= */
+
+@media (max-width: 320px) {
+  .coordinates {
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .coordinates .field {
+    width: 100%;
+  }
+
+  #map {
+    height: 240px;
+  }
+}
