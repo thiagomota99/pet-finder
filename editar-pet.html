@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PetFinder - Cadastrar Pet</title>
+    <title>PetFinder - Editar Pet</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="stylesheet" href="cadastrar.css">
 
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
 </head>
 
 <body>
@@ -25,20 +24,24 @@
                 <strong>PetFinder</strong>
             </div>
 
+            <a href="perfil.html" class="avatar" aria-label="Perfil">
+                👤
+            </a>
+
         </header>
 
 
         <!-- CONTEÚDO -->
         <main class="content">
 
-            <h1>Cadastrar pet</h1>
+            <h1>Editar pet</h1>
 
             <p class="intro">
-                Cadastre um pet desaparecido para ajudar a encontrá-lo.
+                Atualize as informações do seu pet.
             </p>
 
 
-            <form id="cadastroPetForm">
+            <form id="editarPetForm">
 
                 <!-- NOME -->
                 <div class="field">
@@ -127,7 +130,7 @@
                         Temperamento
                     </label>
 
-                    <select id="temperamento">
+                    <select id="temperamento" required>
 
                         <option value="">
                             Selecione
@@ -150,7 +153,29 @@
                 </div>
 
 
-                <!-- ENDEREÇO / LOCALIZAÇÃO -->
+                <!-- STATUS -->
+                <div class="field">
+
+                    <label for="desaparecido">
+                        Status do pet
+                    </label>
+
+                    <select id="desaparecido" required>
+
+                        <option value="true">
+                            Perdido / Desaparecido
+                        </option>
+
+                        <option value="false">
+                            Encontrado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- LOCALIZAÇÃO -->
                 <div class="field">
 
                     <label for="localizacao">
@@ -178,7 +203,7 @@
                     <div id="map"></div>
 
                     <p class="map-instruction">
-                        📍 Clique no mapa para marcar o local onde o pet foi visto.
+                        📍 Clique no mapa para alterar o local onde o pet foi visto.
                     </p>
 
 
@@ -191,7 +216,7 @@
                                 Latitude
                             </label>
 
-                            <input type="text" id="latitude" class="input" readonly placeholder="Selecione no mapa">
+                            <input type="text" id="latitude" class="input" readonly placeholder="Carregando...">
 
                         </div>
 
@@ -202,7 +227,7 @@
                                 Longitude
                             </label>
 
-                            <input type="text" id="longitude" class="input" readonly placeholder="Selecione no mapa">
+                            <input type="text" id="longitude" class="input" readonly placeholder="Carregando...">
 
                         </div>
 
@@ -211,11 +236,30 @@
                 </div>
 
 
-                <!-- FOTOS -->
+
+                <!-- FOTOS ATUAIS -->
+                <div class="field">
+
+                    <label>
+                        Fotos atuais
+                    </label>
+
+                    <div id="fotosAtuais" class="fotos-atuais">
+
+                        <p class="fotos-vazio">
+                            Carregando fotos...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOVAS FOTOS -->
                 <div class="field">
 
                     <label for="fotos">
-                        Fotos
+                        Adicionar novas fotos
                     </label>
 
                     <label class="photo-upload" for="fotos">
@@ -238,7 +282,7 @@
 
                     </label>
 
-                    <input type="file" id="fotos" accept="image/*" multiple hidden>
+                    <input type="file" id="fotos" accept="image/jpeg,image/png,image/webp" multiple hidden>
 
                 </div>
 
@@ -246,21 +290,39 @@
                 <!-- TELEFONE -->
                 <div class="field">
 
-                    <label for="telefone">
+                    <label>
                         Telefone para contato
                         <span class="whatsapp-label">(WhatsApp)</span>
                     </label>
 
-                    <input type="tel" id="telefone" class="input" placeholder="(62) 99999-9999" maxlength="15">
+                    <input type="tel" id="telefone" class="input" placeholder="(62) 99999-9999" maxlength="15" readonly>
+
+                    <small class="field-help">
+                        O telefone de contato é definido no seu perfil.
+                    </small>
 
                 </div>
 
 
-                <!-- PUBLICAR -->
-                <button type="submit" id="btnPublicar" class="btn-main">
 
-                    📢&nbsp; Publicar Anúncio
+                <button type="submit" id="btnSalvar" class="btn-main">
+                    💾&nbsp; Salvar alterações
+                </button>
 
+                <div class="status-actions">
+
+                    <button type="button" id="btnAlterarStatus" class="btn-status">
+                        🟢 Marcar como encontrado
+                    </button>
+
+                    <button type="button" id="btnInativar" class="btn-status btn-inativar">
+                        ⚪ Inativar anúncio
+                    </button>
+
+                </div>
+
+                <button type="button" id="btnCancelar" class="btn-main">
+                    Cancelar
                 </button>
 
             </form>
@@ -271,46 +333,41 @@
         <!-- MENU INFERIOR -->
         <nav class="bottom">
 
-            <a class="nav" href="explorar.html">
+            <a href="explorar.html" class="nav">
 
                 <span class="navicon">
-                    ◉
+                    ⌕
                 </span>
 
-                Explorar
+                <span>
+                    Explorar
+                </span>
 
             </a>
 
 
-            <a class="nav active" href="cadastrar.html">
+            <a href="cadastrar.html" class="nav">
 
                 <span class="navicon plus">
                     +
                 </span>
 
-                Cadastrar
+                <span>
+                    Cadastrar
+                </span>
 
             </a>
 
 
-            <a class="nav" href="meus-pets.html">
+            <a href="perfil.html" class="nav">
 
                 <span class="navicon">
-                    ♡
+                    ♙
                 </span>
 
-                Meus Pets
-
-            </a>
-
-
-            <a class="nav" href="perfil.html">
-
-                <span class="navicon">
-                    ◎
+                <span>
+                    Perfil
                 </span>
-
-                Perfil
 
             </a>
 
@@ -330,8 +387,8 @@
     <!-- AUTENTICAÇÃO -->
     <script src="js/auth.js"></script>
 
-    <!-- CADASTRO -->
-    <script src="js/cadastrar.js"></script>
+    <!-- EDIÇÃO -->
+    <script src="js/editar-pet.js"></script>
 
 </body>
 

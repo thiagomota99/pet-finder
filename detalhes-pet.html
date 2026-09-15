@@ -7,10 +7,12 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" type="image/png" href="assets/logo.png">
     <title>Detalhes do Pet</title>
 
     <link rel="stylesheet" href="detalhes-pet.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 
 </head>
@@ -28,18 +30,19 @@
                 ‹
             </a>
 
-
             <h1 class="title">
                 Detalhes Do Pet
             </h1>
 
+            <div class="header-actions">
 
-            <div class="avatar">
-                👩🏻
+                <button id="btnEditar" class="edit-button" type="button" style="display: none;" title="Editar pet">
+                    ✎
+                </button>
+
             </div>
 
         </header>
-
 
 
         <!-- FOTO PRINCIPAL -->
@@ -140,8 +143,7 @@
                 </p>
 
 
-                <img id="petMapa" class="map" src="assets/map.jpg" alt="Mapa da localização">
-
+                <div id="petMapa" class="map"></div>
             </section>
 
 
@@ -150,9 +152,6 @@
 
             <div class="tutor">
 
-                <div class="tutor-avatar">
-                    👩🏻
-                </div>
 
 
                 <div>
@@ -182,10 +181,12 @@
         </main>
 
     </div>
-
     <script src="js/api.js"></script>
 
     <script src="js/auth.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
 
     <script src="js/detalhes-pet.js"></script>
 

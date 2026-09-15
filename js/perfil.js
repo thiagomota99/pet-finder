@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   configurarLogout();
   configurarEditar();
+  configurarMeusPets();
 });
 
 // ========================================
@@ -28,16 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 async function carregarPerfil() {
   try {
-    /*
-     * Busca o usuário autenticado.
-     *
-     * Endpoint esperado:
-     *
-     * GET /usuarios/me
-     *
-     * Se sua API estiver utilizando /api,
-     * o apiRequest() deve cuidar do prefixo.
-     */
+    console.log("TOKEN:", obterToken());
 
     const usuario = await apiRequest("/usuarios/me");
 
@@ -46,13 +38,6 @@ async function carregarPerfil() {
     preencherPerfil(usuario);
   } catch (error) {
     console.error("Erro ao carregar perfil:", error);
-
-    /*
-     * Caso o endpoint /usuarios/me ainda
-     * não esteja implementado no backend,
-     * tentamos utilizar os dados armazenados
-     * durante o login.
-     */
 
     preencherPerfilLocal();
   }
@@ -67,9 +52,11 @@ function preencherPerfil(usuario) {
 
   const email = usuario.email || "E-mail não informado";
 
-  const telefone = usuario.telefone || "Não informado";
+  const telefone = formatarTelefone(usuario.telefone);
 
-  // Cabeçalho
+  // ========================================
+  // CABEÇALHO
+  // ========================================
 
   const usuarioNome = document.getElementById("usuarioNome");
 
@@ -83,7 +70,9 @@ function preencherPerfil(usuario) {
     usuarioEmail.textContent = email;
   }
 
-  // Dados
+  // ========================================
+  // DADOS DO USUÁRIO
+  // ========================================
 
   const campoNome = document.getElementById("campoNome");
 
@@ -119,6 +108,8 @@ function preencherPerfilLocal() {
 
   const campoEmail = document.getElementById("campoEmail");
 
+  const campoTelefone = document.getElementById("campoTelefone");
+
   const usuarioNome = document.getElementById("usuarioNome");
 
   const usuarioEmail = document.getElementById("usuarioEmail");
@@ -126,6 +117,10 @@ function preencherPerfilLocal() {
   const nomeFinal = nome || "Usuário";
 
   const emailFinal = email || "E-mail não informado";
+
+  // ========================================
+  // CABEÇALHO
+  // ========================================
 
   if (usuarioNome) {
     usuarioNome.textContent = nomeFinal;
@@ -135,6 +130,10 @@ function preencherPerfilLocal() {
     usuarioEmail.textContent = emailFinal;
   }
 
+  // ========================================
+  // DADOS
+  // ========================================
+
   if (campoNome) {
     campoNome.textContent = nomeFinal;
   }
@@ -142,6 +141,44 @@ function preencherPerfilLocal() {
   if (campoEmail) {
     campoEmail.textContent = emailFinal;
   }
+
+  if (campoTelefone) {
+    campoTelefone.textContent = "Não informado";
+  }
+}
+
+// ========================================
+// FORMATAR TELEFONE
+// ========================================
+
+function formatarTelefone(telefone) {
+  if (!telefone) {
+    return "Não informado";
+  }
+
+  const numero = String(telefone).replace(/\D/g, "");
+
+  // Celular brasileiro
+  // (62) 99999-9999
+
+  if (numero.length === 11) {
+    return numero.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+  }
+
+  // Telefone fixo
+  // (62) 9999-9999
+
+  if (numero.length === 10) {
+    return numero.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+  }
+
+  /*
+   * Caso o telefone já esteja formatado
+   * ou tenha outro padrão, mantém
+   * o valor original.
+   */
+
+  return telefone;
 }
 
 // ========================================
@@ -151,9 +188,11 @@ function preencherPerfilLocal() {
 function configurarLogout() {
   const btnSair = document.getElementById("btnSair");
 
-  if (btnSair) {
-    btnSair.addEventListener("click", realizarLogout);
+  if (!btnSair) {
+    return;
   }
+
+  btnSair.addEventListener("click", realizarLogout);
 }
 
 // ========================================
@@ -168,14 +207,13 @@ function realizarLogout() {
   }
 
   /*
-   * Remove o token e os dados
-   * do usuário.
+   * Remove token e dados da sessão.
    */
 
   logout();
 
   /*
-   * Redireciona para o login.
+   * Volta para o login.
    */
 
   window.location.href = "login.html";
@@ -193,6 +231,30 @@ function configurarEditar() {
   }
 
   btnEditar.addEventListener("click", function () {
-    alert("A edição de perfil será implementada em breve.");
+    window.location.href = "editar-perfil.html";
+  });
+}
+
+// ========================================
+// MEUS PETS
+// ========================================
+
+function configurarMeusPets() {
+  const btnMeusPets = document.getElementById("btnMeusPets");
+
+  /*
+   * Seu HTML atual ainda não possui
+   * esse botão.
+   *
+   * Por isso fazemos a verificação
+   * antes de adicionar o evento.
+   */
+
+  if (!btnMeusPets) {
+    return;
+  }
+
+  btnMeusPets.addEventListener("click", function () {
+    window.location.href = "meus-pets.html";
   });
 }

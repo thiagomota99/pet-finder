@@ -4,9 +4,10 @@ let filtroAtual = "TODOS";
 
 let textoBusca = "";
 
+const FOTO_PADRAO = "assets/bolinha.jpg";
+
 document.addEventListener("DOMContentLoaded", async function () {
   // Verifica se o usuário está logado
-
   if (!usuarioEstaLogado()) {
     window.location.href = "login.html";
 
@@ -57,17 +58,19 @@ async function carregarAnimais() {
     console.error("Erro ao carregar animais:", error);
 
     container.innerHTML = `
-        <div class="error-state">
 
-            <h3>
-                Não foi possível carregar os animais.
-            </h3>
+      <div class="error-state">
 
-            <p>
-                Tente novamente mais tarde.
-            </p>
+        <h3>
+          Não foi possível carregar os animais.
+        </h3>
 
-        </div>
+        <p>
+          Tente novamente mais tarde.
+        </p>
+
+      </div>
+
     `;
   }
 }
@@ -112,35 +115,100 @@ function aplicarFiltros() {
 // RENDERIZAR ANIMAIS
 // ========================================
 
-function renderizarAnimais(animais) {
+async function renderizarAnimais(animais) {
   const container = document.getElementById("animaisContainer");
 
   container.innerHTML = "";
 
   if (!animais || animais.length === 0) {
     container.innerHTML = `
-        <div class="empty-state">
 
-            <h3>
-                Nenhum animal encontrado
-            </h3>
+      <div class="empty-state">
 
-            <p>
-                Tente alterar os filtros
-                ou sua busca.
-            </p>
+        <h3>
+          Nenhum animal encontrado
+        </h3>
 
-        </div>
+        <p>
+          Tente alterar os filtros
+          ou sua busca.
+        </p>
+
+      </div>
+
     `;
 
     return;
   }
+
+  /*
+   * Mostra os cards imediatamente
+   * utilizando a imagem padrão.
+   *
+   * Depois substituímos pela imagem
+   * real quando ela for carregada.
+   */
 
   animais.forEach((animal) => {
     const card = criarCardAnimal(animal);
 
     container.appendChild(card);
   });
+
+  /*
+   * Agora buscamos as fotos reais.
+   */
+
+  for (const animal of animais) {
+    try {
+      const foto = await obterFotoAnimal(animal.id);
+
+      if (!foto) {
+        continue;
+      }
+
+      const card = container.querySelector(`[data-animal-id="${animal.id}"]`);
+
+      if (!card) {
+        continue;
+      }
+
+      const imagem = card.querySelector(".photo img");
+
+      if (imagem) {
+        imagem.src = foto;
+      }
+    } catch (error) {
+      console.error(`Erro ao carregar foto do animal ${animal.id}:`, error);
+
+      /*
+       * Se der erro, mantém a imagem padrão.
+       */
+    }
+  }
+}
+
+// ========================================
+// BUSCAR FOTO DO ANIMAL
+// ========================================
+
+async function obterFotoAnimal(animalId) {
+  const fotos = await apiRequest(`/animais/${animalId}/fotos`);
+
+  /*
+   * Se não houver fotos,
+   * usamos a imagem padrão.
+   */
+
+  if (!Array.isArray(fotos) || fotos.length === 0) {
+    return FOTO_PADRAO;
+  }
+
+  /*
+   * Utiliza a primeira foto cadastrada.
+   */
+
+  return fotos[0].url || FOTO_PADRAO;
 }
 
 // ========================================
@@ -152,21 +220,24 @@ function criarCardAnimal(animal) {
 
   article.classList.add("card");
 
+  /*
+   * Guardamos o ID no próprio card.
+   *
+   * Isso permite encontrar o card
+   * depois que a foto for carregada.
+   */
+
+  article.dataset.animalId = animal.id;
+
   const nome = animal.nome || "Animal sem nome";
 
   const raca = animal.raca || "Raça não informada";
 
   const especie = formatarEspecie(animal.especie);
 
-  const status = animal.desaparecido ? "Perdido" : "Encontrado";
-
   /*
-   * Por enquanto utilizamos
-   * uma imagem padrão.
-   *
-   * Quando o endpoint de fotos
-   * estiver pronto, substituiremos
-   * pela foto real.
+   * Enquanto a foto real não chega,
+   * utilizamos a imagem padrão.
    */
 
   const foto = obterFotoPadrao(animal.especie);
@@ -175,64 +246,59 @@ function criarCardAnimal(animal) {
 
     <div class="photo">
 
-        <img
-            src="${foto}"
-            alt="${nome}"
-        >
+      <img
+        src="${foto}"
+        alt="${nome}"
+      >
 
+      <span class="badge ${animal.desaparecido ? "lost" : "reward"}">
 
-        <span class="badge ${animal.desaparecido ? "lost" : "reward"}">
+        ${animal.desaparecido ? "⌕ Perdido" : "✓ Encontrado"}
 
-            ${animal.desaparecido ? "⌕ Perdido" : "✓ Encontrado"}
+      </span>
 
-        </span>
-
-
-        <button
-            type="button"
-            class="heart"
-            onclick="event.stopPropagation()"
-        >
-            ♡
-        </button>
+      <button
+        type="button"
+        class="heart"
+        onclick="event.stopPropagation()"
+      >
+        ♡
+      </button>
 
     </div>
-
 
     <div class="card-body">
 
-        <div class="row">
+      <div class="row">
 
-            <h2>
-                ${nome}
-            </h2>
+        <h2>
+          ${nome}
+        </h2>
 
-            <span class="time">
-                PetFinder
-            </span>
+        <span class="time">
+          PetFinder
+        </span>
 
-        </div>
+      </div>
 
+      <p>
+        ${raca} • ${especie}
+      </p>
 
-        <p>
-            ${raca} • ${especie}
-        </p>
+      <div class="location">
 
+        <span>
+          ⌖ Localização não informada
+        </span>
 
-        <div class="location">
-
-            <span>
-                ⌖ Localização não informada
-            </span>
-
-        </div>
+      </div>
 
     </div>
-`;
+
+  `;
 
   /*
-   * Abre a tela de detalhes
-   * passando o ID do animal.
+   * Abre a tela de detalhes.
    */
 
   article.addEventListener("click", function () {
@@ -248,11 +314,6 @@ function criarCardAnimal(animal) {
 
 function obterFotoPadrao(especie) {
   const tipo = normalizar(especie);
-
-  /*
-   * Use os arquivos que você
-   * realmente possui.
-   */
 
   if (tipo === "CANINO") {
     return "assets/bolinha.jpg";

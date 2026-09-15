@@ -441,6 +441,10 @@ document.addEventListener("DOMContentLoaded", function () {
         body: JSON.stringify(animal),
       });
 
+      const arquivosFotos = document.getElementById("fotos").files;
+
+      await enviarFotos(animalCriado.id, arquivosFotos);
+
       console.log("Animal criado com sucesso:", animalCriado);
 
       /*
@@ -462,4 +466,83 @@ document.addEventListener("DOMContentLoaded", function () {
       btnPublicar.textContent = "📢  Publicar Anúncio";
     }
   });
+
+  async function comprimirImagem(file) {
+    const bitmap = await createImageBitmap(file);
+
+    const tamanhoMaximo = 1280;
+
+    let largura = bitmap.width;
+    let altura = bitmap.height;
+
+    if (largura > tamanhoMaximo || altura > tamanhoMaximo) {
+      if (largura > altura) {
+        altura = Math.round((altura * tamanhoMaximo) / largura);
+
+        largura = tamanhoMaximo;
+      } else {
+        largura = Math.round((largura * tamanhoMaximo) / altura);
+
+        altura = tamanhoMaximo;
+      }
+    }
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = largura;
+    canvas.height = altura;
+
+    const contexto = canvas.getContext("2d");
+
+    contexto.drawImage(bitmap, 0, 0, largura, altura);
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Não foi possível processar a imagem."));
+
+            return;
+          }
+
+          resolve(blob);
+        },
+        "image/webp",
+        0.75,
+      );
+    });
+  }
+
+  async function enviarFotos(animalId, arquivos) {
+    if (!arquivos || arquivos.length === 0) {
+      return;
+    }
+
+    const limiteFotos = 5;
+
+    const fotos = Array.from(arquivos).slice(0, limiteFotos);
+
+    for (const arquivo of fotos) {
+      try {
+        console.log(`Enviando foto: ${arquivo.name}`);
+
+        const imagemComprimida = await comprimirImagem(arquivo);
+
+        const formData = new FormData();
+
+        formData.append("arquivo", imagemComprimida, `${Date.now()}.webp`);
+
+        const foto = await apiRequest(`/animais/${animalId}/fotos`, {
+          method: "POST",
+          body: formData,
+        });
+
+        console.log("Foto cadastrada:", foto);
+      } catch (error) {
+        console.error("Erro ao enviar foto:", error);
+
+        throw error;
+      }
+    }
+  }
 });

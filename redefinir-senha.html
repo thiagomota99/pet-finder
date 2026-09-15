@@ -1,0 +1,88 @@
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetFinder - Nova senha</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+
+<body>
+    <div class="login-page">
+
+        <div class="login-card">
+
+            <div class="logo-big">
+                <span>🐾</span>
+                <strong>PetFinder</strong>
+            </div>
+
+            <h1>Nova senha</h1>
+
+            <p>
+                Crie uma nova senha para acessar sua conta.
+            </p>
+
+            <form id="resetPasswordForm">
+
+                <label for="senha">
+                    Nova senha
+                </label>
+
+                <div class="input-wrap">
+
+                    <span>♙</span>
+
+                    <input id="senha" type="password" placeholder="••••••••" required minlength="6">
+
+                    <button type="button" id="toggleSenha">
+                        ◉
+                    </button>
+
+                </div>
+
+                <label for="confirmarSenha">
+                    Confirmar nova senha
+                </label>
+
+                <div class="input-wrap">
+
+                    <span>♙</span>
+
+                    <input id="confirmarSenha" type="password" placeholder="••••••••" required minlength="6">
+
+                    <button type="button" id="toggleConfirmarSenha">
+                        ◉
+                    </button>
+
+                </div>
+
+                <button class="enter" type="submit" id="btnRedefinir">
+                    Redefinir senha &nbsp; →
+                </button>
+
+                <p id="message" style="display: none;"></p>
+
+            </form>
+
+            <p class="register">
+
+                <a href="login.html">
+                    Voltar para o login
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/redefinir-senha.js"></script>
+
+</body>
+
+</html>

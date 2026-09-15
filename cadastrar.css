@@ -571,3 +571,134 @@ select:focus {
     height: 240px;
   }
 }
+
+/* ============================================================
+   FOTOS ATUAIS - EDIÇÃO
+   ============================================================ */
+
+.fotos-atuais {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.foto-atual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f1f1f1;
+}
+
+.foto-atual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-excluir-foto {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(0, 0, 0, 0.65);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.btn-excluir-foto:hover {
+  background: rgba(190, 0, 0, 0.85);
+  transform: scale(1.05);
+}
+
+.fotos-vazio {
+  grid-column: 1 / -1;
+
+  margin: 0;
+  padding: 18px;
+
+  text-align: center;
+
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+
+  color: #777;
+  font-size: 14px;
+}
+
+.field-help {
+  display: block;
+
+  margin-top: 6px;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+/* AÇÕES DE STATUS DO PET */
+
+.status-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-status {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.btn-status:hover {
+  background: #f5f5f5;
+}
+
+.btn-status:active {
+  transform: scale(0.99);
+}
+
+.btn-status:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-inativar {
+  color: #b00020;
+  border-color: #e5caca;
+}
+
+.btn-inativar:hover {
+  background: #fff5f5;
+}

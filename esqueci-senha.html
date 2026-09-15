@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetFinder - Recuperar senha</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-card">
+
+            <div class="logo-big">
+                <span>🐾</span>
+                <strong>PetFinder</strong>
+            </div>
+
+            <h1>Recuperar senha</h1>
+
+            <p>
+                Informe seu e-mail e enviaremos um link
+                para você criar uma nova senha.
+            </p>
+
+            <form id="forgotPasswordForm">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+                <div class="input-wrap">
+                    <span>✉</span>
+
+                    <input id="email" name="email" type="email" placeholder="seu@email.com" required>
+                </div>
+
+                <button class="enter" type="submit" id="btnEnviar">
+                    Enviar link &nbsp; →
+                </button>
+
+                <p id="message" style="display: none;"></p>
+
+            </form>
+
+            <p class="register">
+                Lembrou sua senha?
+
+                <a href="login.html">
+                    Voltar para o login
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/esqueci-senha.js"></script>
+
+</body>
+
+</html>
