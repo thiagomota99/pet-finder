@@ -1,4 +1,7 @@
-const API_URL = "http://localhost:8080/api";
+const API_URL =
+    window.location.hostname === "localhost"
+        ? "http://localhost:8080/api"
+        : "https://petfinder-api-wu82.onrender.com/api";
 
 async function apiRequest(endpoint, options = {}) {
   const token = localStorage.getItem("token");
